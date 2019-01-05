@@ -7,19 +7,25 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterSuite;
 
 
+
 public class baseClass {
 
     public WebDriver driver;
 
 
-    public baseClass() {
+    public WebDriver getDriver() {
+        return driver;
+    }
 
-        if (driver == null) {
+    public  baseClass(){
+
+        if(driver==null) {
 
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
             driver.get("https://www.caax.co.uk/demo/sxclient/Login.aspx");
             driver.manage().window().maximize();
+            getDriver();
 
         }
     }
@@ -30,6 +36,8 @@ public class baseClass {
             driver.close();
         }
     }
+
+    public void selectBrowser
 
 
 }
