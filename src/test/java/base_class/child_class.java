@@ -8,6 +8,7 @@ public class child_class {
     public void readme(){
         System.out.println("I'm also present");
         System.out.println("I'm also");
+        System.out.println("I'm from git");
     }
 
 
