@@ -10,21 +10,18 @@ public class baseClass {
 
     public WebDriver driver;
 
-    @Test
-    public void initialization(){
 
-        WebDriverManager.chromedriver().setup();
-        driver=new ChromeDriver();
-        driver.get("https://www.caax.co.uk/demo/sxclient/Login.aspx");
-        driver.manage().window().maximize();
+    public baseClass(){
 
+        if(driver==null) {
+
+            WebDriverManager.chromedriver().setup();
+            driver = new ChromeDriver();
+            driver.get("https://www.caax.co.uk/demo/sxclient/Login.aspx");
+            driver.manage().window().maximize();
+
+        }
     }
 
-    @Test
-    public void login(){
 
-        driver.findElement(By.id("UserName")).sendKeys("pradip.caax@gmail.com");
-        driver.findElement(By.id("Password")).sendKeys("pradip123");
-        driver.findElement(By.id("LoginButton")).click();
-    }
 }
