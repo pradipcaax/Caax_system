@@ -8,7 +8,7 @@ import org.testng.annotations.Test;
 public class dashboardTest extends baseClass {
 
     @Test
-    public void login(){
+    public void login() {
 
         driver.findElement(By.id("UserName")).sendKeys("pradip.caax@gmail.com");
         driver.findElement(By.id("Password")).sendKeys("pradip123");
@@ -16,7 +16,7 @@ public class dashboardTest extends baseClass {
     }
 
     @Test
-    public void dashoboard_urlTest(){
+    public void dashoboard_urlTest() {
 
         System.out.println(driver.getCurrentUrl());
     }
