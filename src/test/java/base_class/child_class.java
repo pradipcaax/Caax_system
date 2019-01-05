@@ -7,6 +7,8 @@ public class child_class {
     @Test
     public void readme(){
         System.out.println("I'm also present");
+        System.out.println("I'm also");
     }
+
 
 }
