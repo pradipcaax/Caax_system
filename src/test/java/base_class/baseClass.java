@@ -1,57 +1,54 @@
 package base_class;
 
-import com.aventstack.extentreports.ExtentReports;
-import com.aventstack.extentreports.ExtentTest;
 import io.github.bonigarcia.wdm.WebDriverManager;
+import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.FluentWait;
+import org.openqa.selenium.support.ui.Wait;
 import org.testng.annotations.AfterSuite;
-import org.testng.annotations.BeforeSuite;
-
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.time.Duration;
 import java.util.Properties;
+
 
 
 public class baseClass {
 
-    public WebDriver driver;
-    public Properties OR = new Properties();
-    
+    public static WebDriver driver;
+    private Properties OR = new Properties();
 
 
-    public WebDriver getDriver() {
-        return driver;
-    }
-    @BeforeSuite
-    public  void initialization() throws IOException {
+
+    public  WebDriver initialization() throws IOException {
 
         loadORfile();
-        selectBrowser(OR.getProperty("browser"));
+        driver=selectBrowser(OR.getProperty("browser"));
         getURL(OR.getProperty("url"));
-        getDriver();
-
+        return driver;
     }
 
 
-    public void selectBrowser(String browser){
+    public WebDriver selectBrowser(String browser) {
 
-        if(browser.contains("chroma"))
-        {
+        if (browser.contains("chroma")) {
             WebDriverManager.chromedriver().setup();
             driver = new ChromeDriver();
 
-        }else if (browser.contains("firefox"))
-        {
+        } else if (browser.contains("firefox")) {
             WebDriverManager.firefoxdriver().setup();
-            driver=new FirefoxDriver();
-
+            driver = new FirefoxDriver();
         }
 
+        return driver;
+
     }
+
 
     public void loadORfile() throws IOException {
 
@@ -66,12 +63,28 @@ public class baseClass {
         driver.manage().window().maximize();
     }
 
+    public  void waitForElementToAppearAndClick(WebElement element) {
+        boolean element1=false;
+        Wait<WebDriver> wait = new FluentWait<WebDriver>(driver)
+                .withTimeout(Duration.ofSeconds(60))
+                .pollingEvery(Duration.ofSeconds(2))
+                .ignoring(NoSuchElementException.class);
+        wait.until(ExpectedConditions.visibilityOf(element));
+        if(element.isDisplayed())
+        {
+            element.click();
+        }
+
+    }
+
     @AfterSuite
     public void closeBrowser() {
         if (driver != null) {
             driver.close();
         }
     }
+
+
 
 
 }

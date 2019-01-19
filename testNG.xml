@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
 <suite name="Caax Automation">
-    <listeners>
-        <listener class-name="listners.listner_main"/>
-    </listeners>
     <test name="Caax Po System">
         <classes>
+            <class name="base_class.baseClass"/>
             <class name="test_class.dashboardTest"/>
         </classes>
     </test> <!-- Test -->
